@@ -1,6 +1,6 @@
 # Get Environment
 
-Action that will determine the correct environment based on a provided Git ref.
+GitHub Action that will determine the correct environment based on a provided Git ref.
 
 **This is only intended for personal use, and is not very customizable at the moment.**
 
