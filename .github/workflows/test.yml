@@ -1,25 +1,13 @@
-name: "units-test"
-on:
-  pull_request:
-  push:
-    branches:
-      - master
-      - 'releases/*'
-
+name: "Test run"
+on: push
 jobs:
-  # unit tests
-  units:
+  run:
     runs-on: ubuntu-latest
     steps:
-    - uses: actions/checkout@v1
-    - run: npm ci
-    - run: npm test
-
-  # test action works running from the graph  
-  test:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/checkout@v1
-    - uses: ./
-      with:
-        milliseconds: 1000
+    - name: Checkout
+      uses: actions/checkout@v2
+    - name: Run the action
+      id: runs
+      uses: ./
+    - name: Print the output
+      run: echo ${{ steps.runs.outputs.env }}
