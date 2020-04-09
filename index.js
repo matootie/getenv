@@ -1,19 +1,28 @@
-const core = require('@actions/core');
-const wait = require('./wait');
-
-
-// most @actions toolkit packages have async methods
 async function run() {
-  try { 
-    const ms = core.getInput('milliseconds');
-    console.log(`Waiting ${ms} milliseconds ...`)
+  try {
+    const ref = process.env.GITHUB_REF;
 
-    core.debug((new Date()).toTimeString())
-    await wait(parseInt(ms));
-    core.debug((new Date()).toTimeString())
+    let env = '';
+    const data = ref.match(/(?<=\/)[\w\.-]+/g);
+    if (data[0] == 'tags') {
+      const version = data[1];
 
-    core.setOutput('time', new Date().toTimeString());
-  } 
+      env = version.match(/(?<=-)\w+/g);
+      if (env == null) {
+        env = 'production';
+      } else {
+        env = env[0];
+      }
+    } else {
+      if (data[1] == 'master') {
+        env = 'staging';
+      } else {
+        env = 'development';
+      }
+    }
+
+    core.setOutput('env', env);
+  }
   catch (error) {
     core.setFailed(error.message);
   }

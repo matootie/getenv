@@ -1,13 +1,9 @@
-name: 'Wait'
-description: 'Wait a designated number of milliseconds'
-inputs:
-  milliseconds:  # id of input
-    description: 'number of milliseconds to wait'
-    required: true
-    default: '1000'
+name: "Get Environment"
+description: "Get the appropriate environment for your deployment based on the branch that you workflow is being run on."
+inputs: {}
 outputs:
-  time: # output will be available to future steps 
-    description: 'The message to output'
+  env:
+    description: "The environment"
 runs:
-  using: 'node12'
-  main: 'dist/index.js'
+  using: "node12"
+  main: "dist/index.js"
