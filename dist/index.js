@@ -59,8 +59,7 @@ async function run() {
   try {
     const event = process.env.GITHUB_EVENT_NAME;
 
-    const ref = '';
-
+    let ref = '';
     if (event == 'pull_request') {
       ref = `refs/foobar/${process.env.GITHUB_HEAD_REF}`;
     } else {
