@@ -6,8 +6,10 @@ Action that will determine the correct environment based on a provided Git ref.
 
 Example:
 
-* `refs/heads/foobar` -> development
+* `refs/heads/foobar` -> development-foobar
+* `refs/heads/feature/foobar` -> development-feature-foobar
 * `refs/heads/master` -> staging
+* `refs/heads/staging` -> staging
 * `refs/tags/v1.23.4-alpha.5` -> alpha
 * `refs/tags/v1.23.4-beta.5` -> beta
 * `refs/tags/v1.23.4` -> production

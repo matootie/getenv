@@ -16,10 +16,14 @@ async function run() {
         env = env[0];
       }
     } else {
-      if (data[1] == 'master') {
+      if (data[1] == 'master' || data[1] == 'staging') {
         env = 'staging';
       } else {
-        env = 'development';
+        if (data[2] == null) {
+          env = `development-${data[1]}`;
+        } else {
+          env = `development-${data[1]}-${data[2]}`;
+        }
       }
     }
 
