@@ -1,5 +1,9 @@
 name: "Test run"
-on: push
+on:
+  push: {}
+  pull_request:
+    types: 
+      - closed
 jobs:
   run:
     runs-on: ubuntu-latest
