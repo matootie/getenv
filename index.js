@@ -2,7 +2,15 @@ const core = require('@actions/core');
 
 async function run() {
   try {
-    const ref = process.env.GITHUB_REF;
+    const event = process.env.GITHUB_EVENT_NAME;
+
+    const ref = '';
+
+    if (event == 'pull_request') {
+      ref = `refs/foobar/${process.env.GITHUB_HEAD_REF}`;
+    } else {
+      ref = process.env.GITHUB_REF;
+    }
 
     let env = '';
     const data = ref.match(/(?<=\/)[\w\.-]+/g);
